@@ -1,4 +1,4 @@
-﻿namespace TaskManagement.SharedKernel.Common
+﻿namespace TaskManagement.SharedKernel
 {
     public abstract class DomainEventBase : IDomainEvent
     {

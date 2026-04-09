@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace TaskManagement.SharedKernel.Common
+namespace TaskManagement.SharedKernel
 {
     public interface IDomainEvent : INotification
     {

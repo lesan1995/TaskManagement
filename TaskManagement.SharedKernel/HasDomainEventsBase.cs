@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TaskManagement.SharedKernel.Common
+namespace TaskManagement.SharedKernel
 {
     public abstract class HasDomainEventsBase : IHasDomainEvents
     {

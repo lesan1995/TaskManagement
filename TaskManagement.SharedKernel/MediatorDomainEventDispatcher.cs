@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace TaskManagement.SharedKernel.Common
+namespace TaskManagement.SharedKernel
 {
     public class MediatorDomainEventDispatcher : IDomainEventDispatcher
     {
