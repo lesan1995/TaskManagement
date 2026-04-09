@@ -1,3 +1,7 @@
 <Solution>
   <Project Path="TaskManagement.API/TaskManagement.API.csproj" />
+  <Project Path="TaskManagement.Core/TaskManagement.Core.csproj" />
+  <Project Path="TaskManagement.Infrastructure/TaskManagement.Infrastructure.csproj" />
+  <Project Path="TaskManagement.SharedKernel/TaskManagement.SharedKernel.csproj" />
+  <Project Path="TaskManagement.UseCases/TaskManagement.UseCases.csproj" />
 </Solution>
