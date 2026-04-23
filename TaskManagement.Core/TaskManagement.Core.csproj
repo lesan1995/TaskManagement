@@ -15,4 +15,8 @@
     <ProjectReference Include="..\TaskManagement.SharedKernel\TaskManagement.SharedKernel.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ProjectAggregate\Specifications\" />
+  </ItemGroup>
+
 </Project>
