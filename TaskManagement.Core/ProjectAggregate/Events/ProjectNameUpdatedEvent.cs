@@ -1,5 +1,4 @@
-﻿using TaskManagement.Core.ProjectAggregate;
-using TaskManagement.SharedKernel;
+﻿using TaskManagement.SharedKernel;
 
 namespace TaskManagement.Core.ProjectAggregate.Events
 {

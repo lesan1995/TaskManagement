@@ -2,14 +2,25 @@
 
 namespace TaskManagement.Core.ProjectAggregate
 {
-    public class Issue(ProjectId projectId, IssueTitle title, string description, IssueSeverity severity) : EntityBase<Issue, IssueId>
+    public class Issue : EntityBase<Issue, IssueId>
     {
-        public ProjectId ProjectId { get; private set; } = projectId;
-        public IssueTitle Title { get; private set; } = title;
-        public string Description { get; private set; } = description;
-        public IssueSeverity Severity { get; private set; } = severity;
-        public bool IsResolved { get; private set; } = false;
-        public IssueResolvedComment ResolvedComment { get; private set; } = default!;
+        public ProjectId ProjectId { get; private set; }
+        public IssueTitle Title { get; private set; }
+        public string Description { get; private set; }
+        public IssueSeverity Severity { get; private set; }
+        public bool IsResolved { get; private set; }
+        public IssueResolvedComment ResolvedComment { get; private set; }
+        private Issue(ProjectId projectId, IssueTitle title, string description, IssueSeverity severity)
+        {
+            ProjectId = projectId;
+            Title = title;
+            Description = description;
+            Severity = severity;
+            IsResolved = false;
+            ResolvedComment = default!;
+        }
+        public static Issue Create(ProjectId projectId, IssueTitle title, string description, IssueSeverity severity)
+            => new(projectId, title, description, severity);
         public Issue UpdateTitle(IssueTitle title)
         {
             Title = title;

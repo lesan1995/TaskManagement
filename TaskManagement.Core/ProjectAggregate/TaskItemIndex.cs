@@ -11,5 +11,9 @@
             return new TaskItemIndex(value);
         }
         public override string ToString() => Value.ToString();
+        public static implicit operator int(TaskItemIndex index) => index.Value;
+        public static explicit operator TaskItemIndex(int value) => Create(value);
+        public static TaskItemIndex operator +(TaskItemIndex index, int number)
+            => new TaskItemIndex(index + number);
     }
 }

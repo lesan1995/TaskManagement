@@ -17,7 +17,7 @@ namespace TaskManagement.Core.ProjectAggregate
             JoinedAt = DateTime.UtcNow;
         }
         
-        public ProjectMember Create(ProjectId projectId, UserId userId, ProjectMemberRole role) => new ProjectMember(projectId, userId, role);
+        public static ProjectMember Create(ProjectId projectId, UserId userId, ProjectMemberRole role) => new ProjectMember(projectId, userId, role);
         public bool IsMemberShip() => Role == ProjectMemberRole.Manager || Role == ProjectMemberRole.Member;
     }
 }

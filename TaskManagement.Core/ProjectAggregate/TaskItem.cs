@@ -3,14 +3,25 @@ using TaskManagement.SharedKernel;
 
 namespace TaskManagement.Core.ProjectAggregate
 {
-    public class TaskItem(ProjectId projectId, TaskItemTitle title, string description, TaskItemIndex overIndex) : EntityBase<TaskItem, TaskItemId>
+    public class TaskItem : EntityBase<TaskItem, TaskItemId>
     {
-        public ProjectId ProjectId { get; private set; } = projectId;
-        public TaskItemTitle Title { get; private set; } = title;
-        public string Description { get; private set; } = description;
-        public bool IsDone { get; private set; } = false;
-        public UserId AssigneeId { get; private set; } = default!;
-        public TaskItemIndex OverIndex { get; private set; } = overIndex;
+        public ProjectId ProjectId { get; private set; }
+        public TaskItemTitle Title { get; private set; }
+        public string Description { get; private set; }
+        public bool IsDone { get; private set; }
+        public UserId AssigneeId { get; private set; }
+        public TaskItemIndex OverIndex { get; private set; }
+        private TaskItem(ProjectId projectId, TaskItemTitle title, string description, TaskItemIndex overIndex)
+        {
+            ProjectId = projectId;
+            Title = title;
+            Description = description;
+            IsDone = false;
+            AssigneeId = default!;
+            OverIndex = overIndex;
+        }
+        public static TaskItem Create(ProjectId projectId, TaskItemTitle title, string description, TaskItemIndex overIndex)
+            => new TaskItem(projectId, title, description, overIndex);
         public TaskItem Done()
         {
             IsDone = true;
@@ -31,7 +42,7 @@ namespace TaskManagement.Core.ProjectAggregate
             Description = description;
             return this;
         }
-        public TaskItem UpdateOverIndex(TaskItemIndex overIndex)
+        public void UpdateOverIndex(TaskItemIndex overIndex)
         {
             OverIndex = overIndex;
             return this;

@@ -1,23 +1,34 @@
-﻿using TaskManagement.Core.ProjectAggregate.Events;
+﻿using System.Data;
+using TaskManagement.Core.ProjectAggregate.Events;
+using TaskManagement.Core.User;
 using TaskManagement.SharedKernel;
 
 namespace TaskManagement.Core.ProjectAggregate
 {
-    public class Project(ProjectName name, string description) : AuditableEntityBase<Project, ProjectId>, IAggregateRoot
+    public class Project : AuditableEntityBase<Project, ProjectId>, IAggregateRoot
     {
-        public ProjectName Name { get; private set; } = name;
-        public string Description { get; private set; } = description;
-        public ProjectDeadline Deadline { get; private set; } = default!;
-        public ProjectStatus Status { get; private set; } = ProjectStatus.NotStarted;
+        public ProjectName Name { get; private set; }
+        public string Description { get; private set; }
+        public ProjectDeadline Deadline { get; private set; }
+        public ProjectStatus Status { get; private set; }
         private readonly List<ProjectMember> _members = new();
         public IReadOnlyCollection<ProjectMember> Members => _members.AsReadOnly();
-        public readonly List<TaskItem> _tasks = new();
+        private readonly List<TaskItem> _tasks = new();
         public IReadOnlyCollection<TaskItem> Tasks => _tasks.AsReadOnly();
+        private Project(ProjectName name, string description)
+        {
+            Name = name;
+            Description = description;
+            Deadline = default!;
+            Status = ProjectStatus.NotStarted;
+        }
+        public static Project Create(ProjectName name, string description) => new Project(name, description);
         public Project UpdateName(ProjectName name)
         {
             if(Name == name) return this;
+            var oldName = Name;
             Name = name;
-            RegisterDomainEvents(new ProjectNameUpdatedEvent(this, oldName: name));
+            RegisterDomainEvents(new ProjectNameUpdatedEvent(this, oldName));
             return this;
         }
         public Project UpdateDescription(string description)
@@ -36,23 +47,33 @@ namespace TaskManagement.Core.ProjectAggregate
             Deadline = deadline;
             return this;
         }
-        public Project AddMember(IEnumerable<ProjectMember> members)
+        public Project AddMember(UserId userId, ProjectMemberRole role)
         {
-            _members.AddRange(members);
+            if (_members.Any(x => x.UserId.Equals(userId)))
+                throw new InvalidOperationException("Member already exists");
+            _members.Add(ProjectMember.Create(Id, userId, role));
             return this;
         }
-        public Project RemoveMember(ProjectMember member)
+        public Project RemoveMember(UserId userId)
         {
+            var member = _members.FirstOrDefault(x => x.UserId.Equals(userId));
+            if (member == null)
+                throw new InvalidOperationException("Member does not exists");
             _members.Remove(member);
             return this;
         }
-        public Project AddTask(TaskItem task)
+        public Project AddTask(string title, string description)
         {
-            _tasks.Add(task);
+            var taskWithLastOverIndex = _tasks.OrderByDescending(x => x.OverIndex).FirstOrDefault();
+            var taskOverIndex = taskWithLastOverIndex?.OverIndex + 1 ?? 0;
+            _tasks.Add(TaskItem.Create(Id, TaskItemTitle.Create(title), description, TaskItemIndex.Create(taskOverIndex)));
             return this;
         }
-        public Project RemoveTask(TaskItem task)
+        public Project RemoveTask(TaskItemId taskItemId)
         {
+            var task = _tasks.FirstOrDefault(x => x.Id.Equals(taskItemId));
+            if (task == null)
+                throw new InvalidOperationException("Task does not exists");
             _tasks.Remove(task);
             return this;
         }
