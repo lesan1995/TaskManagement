@@ -8,15 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ardalis.Specification" Version="9.3.1" />
     <PackageReference Include="Vogen" Version="8.0.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\TaskManagement.SharedKernel\TaskManagement.SharedKernel.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ProjectAggregate\Specifications\" />
   </ItemGroup>
 
 </Project>

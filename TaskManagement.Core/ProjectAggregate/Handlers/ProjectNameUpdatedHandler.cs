@@ -14,9 +14,8 @@ namespace TaskManagement.Core.ProjectAggregate.Handlers
         {
             logger.LogInformation("Handling Project name updated event for {}", domainEvent.Project.Id);
             var userReceives = domainEvent.Project.Members.Select(x => x.UserId);
-            await sendNotificationService.SendNotification(
+            await sendNotificationService.SendNotifications(
                 userReceives,
-                NotificationTitle.Create($"Project update to new name"),
                 NotificationContent.Create($"Project named '{domainEvent.OldName}' has been updated to new name"));
         }
     }

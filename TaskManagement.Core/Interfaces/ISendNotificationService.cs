@@ -6,6 +6,7 @@ namespace TaskManagement.Core.Interfaces
 {
     public interface ISendNotificationService
     {
-        public Task<Result> SendNotification(IEnumerable<UserId> userIds, NotificationTitle title, NotificationContent content);
+        public Task<Result> SendNotification(UserId userId, NotificationContent content);
+        public Task<Result> SendNotifications(IEnumerable<UserId> userIds, NotificationContent content);
     }
 }

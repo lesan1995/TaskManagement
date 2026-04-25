@@ -4,7 +4,9 @@
     {
         public string Value { get; init; }
         public const int MaxLength = 500;
+        public const int MaxLengthSummary = 10;
         private NotificationContent(string value) => Value = value;
+        public string Summary() => Value.Substring(0, MaxLengthSummary);
         public static NotificationContent Create(string value)
         {
             if(string.IsNullOrEmpty(value))

@@ -5,41 +5,29 @@ namespace TaskManagement.Core.ProjectAggregate
     public class Issue : EntityBase<Issue, IssueId>
     {
         public ProjectId ProjectId { get; private set; }
-        public IssueTitle Title { get; private set; }
-        public string Description { get; private set; }
+        public IssueContent Content { get; private set; }
         public IssueSeverity Severity { get; private set; }
         public bool IsResolved { get; private set; }
         public IssueResolvedComment ResolvedComment { get; private set; }
-        private Issue(ProjectId projectId, IssueTitle title, string description, IssueSeverity severity)
+        private Issue(ProjectId projectId, IssueContent content, IssueSeverity severity)
         {
             ProjectId = projectId;
-            Title = title;
-            Description = description;
+            Content = content;
             Severity = severity;
             IsResolved = false;
             ResolvedComment = default!;
         }
-        public static Issue Create(ProjectId projectId, IssueTitle title, string description, IssueSeverity severity)
-            => new(projectId, title, description, severity);
-        public Issue UpdateTitle(IssueTitle title)
+        internal static Issue Create(ProjectId projectId, IssueContent content, IssueSeverity severity)
+            => new(projectId, content, severity);
+        internal void UpdateInfor(IssueContent content, IssueSeverity severity)
         {
-            Title = title;
-            return this;
-        }
-        public Issue UpdateDescription(string description)
-        {
-            Description = description;
-            return this;
-        }
-        public Issue UpdateSeverity(IssueSeverity severity)
-        {
+            if (Content == content && Severity == severity) return;
+            Content = content;
             Severity = severity;
-            return this;
         }
-        public Issue Resolve(string comment)
+        internal void Resolve(string comment)
         {
             IsResolved = true;
-            return this;
         }
     }
 }

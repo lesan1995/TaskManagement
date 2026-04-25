@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TaskManagement.Core.ProjectAggregate
+﻿namespace TaskManagement.Core.ProjectAggregate
 {
     public readonly record struct IssueResolvedComment
     {
@@ -13,7 +9,7 @@ namespace TaskManagement.Core.ProjectAggregate
         {
             if (string.IsNullOrEmpty(value))
                 throw new ArgumentNullException("Issue Title cannot be empty.");
-            if (value.Length < MaxLength)
+            if (value.Length > MaxLength)
                 throw new ArgumentException($"Issue title cannot be more than {MaxLength} characters");
             return new IssueResolvedComment(value);
         }
