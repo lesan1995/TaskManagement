@@ -37,7 +37,7 @@ namespace TaskManagement.Core.ProjectAggregate
         {
             var attachment = _attachments.FirstOrDefault(x => x.Id == attachmentId);
             if (attachment == null)
-                throw new InvalidOperationException($"Attachment {attachmentId} not found in task {Id}");
+                throw new InvalidOperationException($"Attachment {attachmentId} not found in issue {Id}");
             _attachments.Remove(attachment);
         }
     }

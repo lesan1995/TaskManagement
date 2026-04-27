@@ -47,19 +47,17 @@ namespace TaskManagement.Core.ProjectAggregate
             Deadline = deadline;
             return this;
         }
-        public Project Cancel()
+        public void Cancel()
         {
             EnsureProjectActive();
             Status = ProjectStatus.Cancelled;
             RegisterDomainEvents(new ProjectStatusUpdatedEvent(this));
-            return this;
         }
-        public Project Hold()
+        public void Hold()
         {
             EnsureProjectActive();
             Status = ProjectStatus.OnHold;
             RegisterDomainEvents(new ProjectStatusUpdatedEvent(this));
-            return this;
         }
 
         //-----------------Member-----------

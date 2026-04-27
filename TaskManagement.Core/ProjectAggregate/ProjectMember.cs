@@ -18,5 +18,6 @@ namespace TaskManagement.Core.ProjectAggregate
         
         internal static ProjectMember Create(ProjectId projectId, UserId userId, ProjectMemberRole role) => new ProjectMember(projectId, userId, role);
         internal bool IsMemberShip() => Role == ProjectMemberRole.Manager || Role == ProjectMemberRole.Member;
+        internal bool IsManager() => Role == ProjectMemberRole.Manager;
     }
 }
