@@ -8,6 +8,6 @@ namespace TaskManagement.Core.NotificationAggregate
         public NotificationId NotificationId { get; private set; } = notificationId;
         public UserId UserId { get; private set; } = userId;
         public bool IsRead { get; private set; } = false;
-        public void Read() => IsRead = true;
+        internal void Read() => IsRead = true;
     }
 }
