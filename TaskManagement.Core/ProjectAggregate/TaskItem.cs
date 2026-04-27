@@ -16,35 +16,21 @@ namespace TaskManagement.Core.ProjectAggregate
             ProjectId = projectId;
             Title = title;
             Description = description;
+            OverIndex = overIndex;
             IsDone = false;
             AssigneeId = default!;
-            OverIndex = overIndex;
         }
         internal static TaskItem Create(ProjectId projectId, TaskItemTitle title, string description, TaskItemIndex overIndex)
             => new TaskItem(projectId, title, description, overIndex);
-        internal void MarkDone()
-        {
-            IsDone = true;
-        }
-        internal void UnDone()
-        {
-            IsDone = false;
-        }
-        internal void Assign(UserId userId)
-        {
-            AssigneeId = userId;
-        }
-        internal void UnAssign()
-        {
-            AssigneeId = default!;
-        }
         internal void UpdateInfor(TaskItemTitle title, string description)
         {
+            if(Title == title && Description == description) return;
             Title = title;
+            Description = description;
         }
-        internal void UpdateOverIndex(TaskItemIndex overIndex)
-        {
-            OverIndex = overIndex;
-        }
+        internal void MarkDone(bool isDone) => IsDone = isDone;
+        internal void Assign(UserId userId) => AssigneeId = userId;
+        internal void UnAssign() => AssigneeId = default!;
+        internal void UpdateOverIndex(TaskItemIndex overIndex) => OverIndex = overIndex;
     }
 }

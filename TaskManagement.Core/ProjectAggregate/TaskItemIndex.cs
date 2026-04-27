@@ -4,12 +4,10 @@
     {
         public int Value { get; init; }
         private TaskItemIndex(int value) => Value = value;
-        public static TaskItemIndex Create(int value)
-        {
-            if (value < 0)
-                throw new ArgumentNullException("Task Index cannot be positive");
-            return new TaskItemIndex(value);
-        }
+        public static TaskItemIndex Create(int value) =>
+            value < 0
+            ? throw new ArgumentNullException("Task Index cannot be positive")
+            : new TaskItemIndex(value);
         public override string ToString() => Value.ToString();
         public static implicit operator int(TaskItemIndex index) => index.Value;
         public static explicit operator TaskItemIndex(int value) => Create(value);

@@ -25,9 +25,10 @@ namespace TaskManagement.Core.ProjectAggregate
             Content = content;
             Severity = severity;
         }
-        internal void Resolve(string comment)
+        internal void Resolve(IssueResolvedComment comment)
         {
             IsResolved = true;
+            ResolvedComment = comment;
         }
     }
 }
