@@ -10,6 +10,8 @@ namespace TaskManagement.Core.ProjectAggregate
         public bool IsDone { get; private set; }
         public UserId AssigneeId { get; private set; }
         public TaskItemIndex OverIndex { get; private set; }
+        private readonly List<Attachment> _attachments = new List<Attachment>();
+        public IReadOnlyCollection<Attachment> Attachments => _attachments.AsReadOnly();
         private TaskItem(ProjectId projectId, TaskItemTitle title, string description, TaskItemIndex overIndex)
         {
             ProjectId = projectId;
@@ -31,5 +33,13 @@ namespace TaskManagement.Core.ProjectAggregate
         internal void Assign(UserId userId) => AssigneeId = userId;
         internal void UnAssign() => AssigneeId = default!;
         internal void UpdateOverIndex(TaskItemIndex overIndex) => OverIndex = overIndex;
+        internal void AddAttachment(AttachmentUrl fileUrl, UserId uploadBy) => _attachments.Add(Attachment.CreateForTask(fileUrl, uploadBy, Id));
+        internal void RemoveAttachment(AttachmentId attachmentId)
+        {
+            var attachment = _attachments.FirstOrDefault(x => x.Id == attachmentId);
+            if (attachment == null)
+                throw new InvalidOperationException($"Attachment {attachmentId} not found in task {Id}");
+            _attachments.Remove(attachment);
+        }
     }
 }

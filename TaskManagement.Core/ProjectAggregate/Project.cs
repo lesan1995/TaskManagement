@@ -159,7 +159,20 @@ namespace TaskManagement.Core.ProjectAggregate
             _tasks.Remove(FindTask(taskItemId));
             return this;
         }
-
+        public Project AddTaskAttachment(TaskItemId taskItemId, AttachmentUrl fileUrl, UserId uploadBy)
+        {
+            EnsureProjectActive();
+            var task = FindTask(taskItemId);
+            task.AddAttachment(fileUrl, uploadBy);
+            return this;
+        }
+        public Project RemoveTaskAttachment(TaskItemId taskItemId, AttachmentId attachmentId)
+        {
+            EnsureProjectActive();
+            var task = FindTask(taskItemId);
+            task.RemoveAttachment(attachmentId);
+            return this;
+        }
         //-----------------Issue-----------
         //----------------------------------
         private Issue FindIssue(IssueId issueId) =>
@@ -188,6 +201,20 @@ namespace TaskManagement.Core.ProjectAggregate
         {
             EnsureProjectActive();
             _issues.Remove(FindIssue(issueId));
+            return this;
+        }
+        public Project AddIssueAttachment(IssueId issueId, AttachmentUrl fileUrl, UserId uploadBy)
+        {
+            EnsureProjectActive();
+            var issue = FindIssue(issueId);
+            issue.AddAttachment(fileUrl, uploadBy);
+            return this;
+        }
+        public Project RemoveIssueAttachment(IssueId issueId, AttachmentId attachmentId)
+        {
+            EnsureProjectActive();
+            var issue = FindIssue(issueId);
+            issue.RemoveAttachment(attachmentId);
             return this;
         }
     }

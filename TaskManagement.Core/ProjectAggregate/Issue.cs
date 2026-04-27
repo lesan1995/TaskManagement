@@ -1,4 +1,6 @@
-﻿namespace TaskManagement.Core.ProjectAggregate
+﻿using TaskManagement.Core.User;
+
+namespace TaskManagement.Core.ProjectAggregate
 {
     public class Issue : EntityBase<Issue, IssueId>
     {
@@ -7,6 +9,8 @@
         public IssueSeverity Severity { get; private set; }
         public bool IsResolved { get; private set; }
         public IssueResolvedComment ResolvedComment { get; private set; }
+        private readonly List<Attachment> _attachments = new List<Attachment>();
+        public IReadOnlyCollection<Attachment> Attachments => _attachments.AsReadOnly();
         private Issue(ProjectId projectId, IssueContent content, IssueSeverity severity)
         {
             ProjectId = projectId;
@@ -27,6 +31,14 @@
         {
             IsResolved = true;
             ResolvedComment = comment;
+        }
+        internal void AddAttachment(AttachmentUrl fileUrl, UserId uploadBy) => _attachments.Add(Attachment.CreateForIssue(fileUrl, uploadBy, Id));
+        internal void RemoveAttachment(AttachmentId attachmentId)
+        {
+            var attachment = _attachments.FirstOrDefault(x => x.Id == attachmentId);
+            if (attachment == null)
+                throw new InvalidOperationException($"Attachment {attachmentId} not found in task {Id}");
+            _attachments.Remove(attachment);
         }
     }
 }
