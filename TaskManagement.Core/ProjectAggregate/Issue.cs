@@ -1,6 +1,4 @@
-﻿using TaskManagement.SharedKernel;
-
-namespace TaskManagement.Core.ProjectAggregate
+﻿namespace TaskManagement.Core.ProjectAggregate
 {
     public class Issue : EntityBase<Issue, IssueId>
     {

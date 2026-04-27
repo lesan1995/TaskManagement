@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TaskManagement.Core.ProjectAggregate
+﻿namespace TaskManagement.Core.ProjectAggregate
 {
     public readonly record struct IssueSeverity
     {

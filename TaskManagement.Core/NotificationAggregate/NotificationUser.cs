@@ -1,5 +1,4 @@
 ﻿using TaskManagement.Core.User;
-using TaskManagement.SharedKernel;
 
 namespace TaskManagement.Core.NotificationAggregate
 {

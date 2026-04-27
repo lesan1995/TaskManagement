@@ -1,7 +1,5 @@
-﻿using System.Data;
-using TaskManagement.Core.ProjectAggregate.Events;
+﻿using TaskManagement.Core.ProjectAggregate.Events;
 using TaskManagement.Core.User;
-using TaskManagement.SharedKernel;
 
 namespace TaskManagement.Core.ProjectAggregate
 {

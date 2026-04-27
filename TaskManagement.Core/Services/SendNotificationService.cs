@@ -1,8 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
-using TaskManagement.Core.Interfaces;
+﻿using TaskManagement.Core.Interfaces;
 using TaskManagement.Core.NotificationAggregate;
 using TaskManagement.Core.User;
-using TaskManagement.SharedKernel;
 using TaskManagement.SharedKernel.Results;
 
 namespace TaskManagement.Core.Services

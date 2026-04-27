@@ -1,6 +1,4 @@
-﻿using MediatR;
-using Microsoft.Extensions.Logging;
-using TaskManagement.Core.Interfaces;
+﻿using TaskManagement.Core.Interfaces;
 using TaskManagement.Core.NotificationAggregate;
 using TaskManagement.Core.ProjectAggregate.Events;
 

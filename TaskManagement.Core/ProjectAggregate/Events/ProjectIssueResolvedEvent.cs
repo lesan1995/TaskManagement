@@ -1,7 +1,4 @@
-﻿using TaskManagement.Core.User;
-using TaskManagement.SharedKernel;
-
-namespace TaskManagement.Core.ProjectAggregate.Events
+﻿namespace TaskManagement.Core.ProjectAggregate.Events
 {
     public sealed class ProjectIssueResolvedEvent(Project project, IssueId issueId) : DomainEventBase
     {
