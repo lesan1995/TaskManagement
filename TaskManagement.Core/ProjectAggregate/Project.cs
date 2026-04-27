@@ -47,17 +47,19 @@ namespace TaskManagement.Core.ProjectAggregate
             Deadline = deadline;
             return this;
         }
-        public void Cancel()
+        public Project Cancel()
         {
             EnsureProjectActive();
             Status = ProjectStatus.Cancelled;
             RegisterDomainEvents(new ProjectStatusUpdatedEvent(this));
+            return this;
         }
-        public void Hold()
+        public Project Hold()
         {
             EnsureProjectActive();
             Status = ProjectStatus.OnHold;
             RegisterDomainEvents(new ProjectStatusUpdatedEvent(this));
+            return this;
         }
 
         //-----------------Member-----------
@@ -99,7 +101,7 @@ namespace TaskManagement.Core.ProjectAggregate
         {
             EnsureProjectActive();
             var oldProgress = Progress;
-            _tasks.Add(TaskItem.Create(Id, title, description, TaskItemIndex.Create(_tasks.Count())));
+            _tasks.Add(TaskItem.Create(Id, title, description, TaskItemIndex.Create(_tasks.Count() + 1)));
             UpdateProjectStatus(oldProgress);
             return this;
         }
@@ -118,7 +120,7 @@ namespace TaskManagement.Core.ProjectAggregate
                 || !currentOrders.All(newOrders.Contains))
                 throw new InvalidOperationException("New order list must contain exactly the same tasks as current list.");
             for (int newOverIndex = 0; newOverIndex < newOrders.Count(); newOverIndex++)
-                FindTask(newOrders[newOverIndex]).UpdateOverIndex(TaskItemIndex.Create(newOverIndex));
+                FindTask(newOrders[newOverIndex]).UpdateOverIndex(TaskItemIndex.Create(newOverIndex + 1));
             return this;
         }
         public Project MarkDoneTask(TaskItemId taskItemId, bool isDone)

@@ -4,6 +4,6 @@
     {
         public string UserId { get; }
         public string UserName { get; }
-        public bool IsAuthenticator { get; }
+        public bool IsAuthenticated { get; }
     }
 }
