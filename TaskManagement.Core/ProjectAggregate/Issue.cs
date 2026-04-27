@@ -19,7 +19,7 @@ namespace TaskManagement.Core.ProjectAggregate
         }
         internal static Issue Create(ProjectId projectId, IssueContent content, IssueSeverity severity)
             => new(projectId, content, severity);
-        internal void UpdateInfor(IssueContent content, IssueSeverity severity)
+        internal void UpdateInfo(IssueContent content, IssueSeverity severity)
         {
             if (Content == content && Severity == severity) return;
             Content = content;

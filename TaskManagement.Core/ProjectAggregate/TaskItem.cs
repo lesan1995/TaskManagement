@@ -22,7 +22,7 @@ namespace TaskManagement.Core.ProjectAggregate
         }
         internal static TaskItem Create(ProjectId projectId, TaskItemTitle title, string description, TaskItemIndex overIndex)
             => new TaskItem(projectId, title, description, overIndex);
-        internal void UpdateInfor(TaskItemTitle title, string description)
+        internal void UpdateInfo(TaskItemTitle title, string description)
         {
             if(Title == title && Description == description) return;
             Title = title;

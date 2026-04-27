@@ -15,7 +15,7 @@ namespace TaskManagement.Core.ProjectAggregate
         public IReadOnlyCollection<ProjectMember> Members => _members.AsReadOnly();
         private readonly List<TaskItem> _tasks = new();
         public IReadOnlyCollection<TaskItem> Tasks => _tasks.AsReadOnly();
-        public int Progress => _tasks.Any() ? _tasks.Count(x => x.IsDone) * 100 / _tasks.Count() : 0;
+        public int Progress => _tasks.Count() == 0 ? 0 : (int)Math.Round(_tasks.Count(x => x.IsDone) * 100.0 / _tasks.Count());
         private readonly List<Issue> _issues = new();
         public IReadOnlyCollection<Issue> Issues => _issues.AsReadOnly();
         private Project(ProjectName name, string description)
@@ -33,7 +33,7 @@ namespace TaskManagement.Core.ProjectAggregate
             if (Status == ProjectStatus.Cancelled)
                 throw new InvalidOperationException("Project has been cancelled");
         }
-        public Project UpdateInfor(ProjectName name, string description)
+        public Project UpdateInfo(ProjectName name, string description)
         {
             EnsureProjectActive();
             if (Name == name && Description == description) return this;
@@ -110,7 +110,7 @@ namespace TaskManagement.Core.ProjectAggregate
         public Project UpdateTask(TaskItemId taskItemId, TaskItemTitle title, string description)
         {
             EnsureProjectActive();
-            FindTask(taskItemId).UpdateInfor(title, description);
+            FindTask(taskItemId).UpdateInfo(title, description);
             return this;
         }
         public Project ReorderTasks(List<TaskItemId> newOrders)
@@ -176,7 +176,7 @@ namespace TaskManagement.Core.ProjectAggregate
         public Project UpdateIssue(IssueId issueId, IssueContent content, IssueSeverity severity)
         {
             EnsureProjectActive();
-            FindIssue(issueId).UpdateInfor(content, severity);
+            FindIssue(issueId).UpdateInfo(content, severity);
             return this;
         }
         public Project ResolveIssue(IssueId issueId, IssueResolvedComment comment)
