@@ -8,7 +8,7 @@ namespace TaskManagement.Core.ProjectAggregate.Handlers
         ILogger<ProjectMemberRemovedHandler> logger,
         ISendNotificationService sendNotificationService) : INotificationHandler<ProjectMemberRemovedEvent>
     {
-        public async Task Handle(ProjectMemberRemovedEvent domainEvent, CancellationToken cancellationToken)
+        public async ValueTask Handle(ProjectMemberRemovedEvent domainEvent, CancellationToken cancellationToken)
         {
             logger.LogInformation($"Handling project member removed event for {domainEvent.Project.Id}");
             await sendNotificationService.SendNotifications(

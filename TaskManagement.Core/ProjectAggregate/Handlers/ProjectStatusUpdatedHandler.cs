@@ -8,7 +8,7 @@ namespace TaskManagement.Core.ProjectAggregate.Handlers
         ILogger<ProjectStatusUpdatedHandler> logger,
         ISendNotificationService sendNotificationService) : INotificationHandler<ProjectStatusUpdatedEvent>
     {
-        public async Task Handle(ProjectStatusUpdatedEvent domainEvent, CancellationToken cancellationToken)
+        public async ValueTask Handle(ProjectStatusUpdatedEvent domainEvent, CancellationToken cancellationToken)
         {
             logger.LogInformation("Handling project status updated event for {}", domainEvent.Project.Id);
             await sendNotificationService.SendNotifications(

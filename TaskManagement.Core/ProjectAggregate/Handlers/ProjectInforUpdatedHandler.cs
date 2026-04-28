@@ -8,7 +8,7 @@ namespace TaskManagement.Core.ProjectAggregate.Handlers
         ILogger<ProjectInforUpdatedHandler> logger,
         ISendNotificationService sendNotificationService) : INotificationHandler<ProjectInforUpdatedEvent>
     {
-        public async Task Handle(ProjectInforUpdatedEvent domainEvent, CancellationToken cancellationToken)
+        public async ValueTask Handle(ProjectInforUpdatedEvent domainEvent, CancellationToken cancellationToken)
         {
             logger.LogInformation("Handling Project infor updated event for {}", domainEvent.Project.Id);
             var userReceives = domainEvent.Project.Members.Select(x => x.UserId);
