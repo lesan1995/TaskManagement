@@ -9,17 +9,17 @@
         public bool IsDeleted { get; private set; } = false;
         public string? DeletedBy { get; private set; }
         public DateTime? DeletedAt { get; private set; }
-        protected void SetCreated(string createdBy)
+        public void SetCreated(string createdBy)
         {
             CreatedBy = createdBy;
             CreatedAt = DateTime.UtcNow;
         }
-        protected void SetModified(string modifiedBy)
+        public void SetModified(string modifiedBy)
         {
             LastModifiedBy = modifiedBy;
             LastModifiedAt = DateTime.UtcNow;
         }
-        protected void SoftDelete(string deletedBy)
+        public void SoftDelete(string deletedBy)
         {
             IsDeleted = true;
             DeletedBy = deletedBy;

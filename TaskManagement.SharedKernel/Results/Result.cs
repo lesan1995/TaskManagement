@@ -19,7 +19,7 @@
         public static Result Invalid(IEnumerable<ValidationError> validationErrors) => new(ResultStatus.Invalid, validationErrors: validationErrors);
         public static Result Invalid(string errorMessage) => new(ResultStatus.Invalid, errorMessage);
         public static Result Error(string message) => new(ResultStatus.Error, message);
-        public static Result Forbidden() => new(ResultStatus.Forbidden);
+        public static Result Forbidden(string message) => new(ResultStatus.Forbidden, message);
         public static Result Unauthorize() => new(ResultStatus.Unauthorize);
         public static Result Conflict() => new(ResultStatus.Conflict);
     }
@@ -38,7 +38,7 @@
         public static new Result<T> Invalid(IEnumerable<ValidationError> validationErrors) => new(ResultStatus.Invalid, validationErrors: validationErrors);
         public static new Result<T> Invalid(string errorMessage) => new(ResultStatus.Invalid, errorMessage: errorMessage);
         public static new Result<T> Error(string message) => new(ResultStatus.Error, errorMessage: message);
-        public static new Result<T> Forbidden() => new(ResultStatus.Forbidden);
+        public static new Result<T> Forbidden(string message) => new(ResultStatus.Forbidden, errorMessage: message);
         public static new Result<T> Unauthorize() => new(ResultStatus.Unauthorize);
         public static new Result<T> Conflict() => new(ResultStatus.Conflict);
     }
