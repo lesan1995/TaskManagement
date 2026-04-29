@@ -15,13 +15,13 @@ namespace TaskManagement.UseCases.Projects.DTO
                 Progress: project.Progress,
                 Members: project.Members.MapToMemberDtos(userInfos),
                 Tasks: project.Tasks.MapToTaskItemDtos(userInfos),
-                Issues: project.Issues.MapToTaskItemDtos(userInfos)
+                Issues: project.Issues.MapToIssueItemDtos(userInfos)
                 );
         }
         public static List<ProjectMemberDTO> MapToMemberDtos(this IReadOnlyCollection<ProjectMember> members, Dictionary<string, UserInfo> userInfos)
         {
             return members.Select(m => new ProjectMemberDTO(
-                    UserInfo: userInfos.GetValueOrDefault(m.UserId.ToString()) ?? new UserInfo { UserId = m.UserId.ToString() },
+                    UserInfo: userInfos.GetValueOrDefault(m.UserId.ToString()) ?? new UserInfo { UserId = m.UserId.ToString(), UserName = "Unknow"  },
                     Role: m.Role)).ToList();
         }
         public static List<TaskItemDTO> MapToTaskItemDtos(this IReadOnlyCollection<TaskItem> tasks, Dictionary<string, UserInfo> userInfos)
@@ -35,7 +35,7 @@ namespace TaskManagement.UseCases.Projects.DTO
                     Attachments: task.Attachments.Select(attachment => attachment.FileUrl).ToList()
                     )).ToList();
         }
-        public static List<IssueDTO> MapToTaskItemDtos(this IReadOnlyCollection<Issue> issues, Dictionary<string, UserInfo> userInfos)
+        public static List<IssueDTO> MapToIssueItemDtos(this IReadOnlyCollection<Issue> issues, Dictionary<string, UserInfo> userInfos)
         {
             return issues.Select(issue => new IssueDTO(
                     Content: issue.Content,

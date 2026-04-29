@@ -145,7 +145,7 @@ namespace TaskManagement.Core.ProjectAggregate
             EnsureProjectActive();
             FindMember(userId);
             var task = FindTask(taskItemId);
-            if (task.AssigneeId == null || task.AssigneeId != userId)
+            if (!task.AssigneeId.HasValue || task.AssigneeId != userId)
                 throw new InvalidOperationException("User does not belong to this task");
             task.UnAssign();
             return this;

@@ -24,7 +24,7 @@
                 hasChanges = true;
             }
 
-            if (command.Deadline!= null && project.Deadline != command.Deadline)
+            if (command.Deadline.HasValue && project.Deadline != command.Deadline)
             {
                 project.SetDeadline(command.Deadline.Value);
                 hasChanges = true;
