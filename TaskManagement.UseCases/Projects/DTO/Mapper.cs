@@ -15,7 +15,7 @@ namespace TaskManagement.UseCases.Projects.DTO
                 Progress: project.Progress,
                 Members: project.Members.MapToMemberDtos(userInfos),
                 Tasks: project.Tasks.MapToTaskItemDtos(userInfos),
-                Issues: project.Issues.MapToIssueDtos(userInfos)
+                Issues: project.Issues.MapToIssueDtos()
                 );
         }
         public static List<ProjectMemberDTO> MapToMemberDtos(this IReadOnlyCollection<ProjectMember> members, Dictionary<string, UserInfo> userInfos)
@@ -35,7 +35,7 @@ namespace TaskManagement.UseCases.Projects.DTO
                     Attachments: task.Attachments.Select(attachment => attachment.FileUrl).ToList()
                     )).ToList();
         }
-        public static List<IssueDTO> MapToIssueDtos(this IReadOnlyCollection<Issue> issues, Dictionary<string, UserInfo> userInfos)
+        public static List<IssueDTO> MapToIssueDtos(this IReadOnlyCollection<Issue> issues)
         {
             return issues.Select(issue => new IssueDTO(
                     Content: issue.Content,

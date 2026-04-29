@@ -13,7 +13,7 @@ namespace TaskManagement.UseCases.Projects.List
                 IsManager: currentUser.IsManager,
                 Search: request.Search,
                 Status: request.Status,
-                SortBy: request.Sort,
+                SortBy: request.SortBy,
                 SortDesc: request.SortDesc,
                 IncludeDeleted: false
             );
