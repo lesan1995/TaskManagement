@@ -1,6 +1,4 @@
-﻿using TaskManagement.SharedKernel.User;
-
-namespace TaskManagement.UseCases.Projects.DTO
+﻿namespace TaskManagement.UseCases.Projects.DTO
 {
     public static class Mapper
     {

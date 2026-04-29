@@ -1,6 +1,4 @@
-﻿using TaskManagement.Core.User;
-
-namespace TaskManagement.UseCases.Projects.List
+﻿namespace TaskManagement.UseCases.Projects.List
 {
     public record ListProjectsFilter(
         string UserId,

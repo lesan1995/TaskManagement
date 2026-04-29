@@ -1,6 +1,4 @@
-﻿using TaskManagement.UseCases.Projects.DTO;
-
-namespace TaskManagement.UseCases.Projects.List
+﻿namespace TaskManagement.UseCases.Projects.List
 {
     public interface IListProjectsQueryService
     {
