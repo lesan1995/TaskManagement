@@ -1,7 +1,4 @@
-﻿using TaskManagement.Core.ProjectAggregate.Specifications;
-using TaskManagement.UseCases.Projects.DTO;
-
-namespace TaskManagement.UseCases.Projects.Get
+﻿namespace TaskManagement.UseCases.Projects.Get
 {
     public class GetProjectHandler(
         IRepository<Project> repository,
@@ -9,7 +6,7 @@ namespace TaskManagement.UseCases.Projects.Get
     {
         public async ValueTask<Result<ProjectDetailDTO>> Handle(GetProjectQuery query, CancellationToken ct)
         {
-            var spec = new ProjectByIdSpec(query.ProjectId);
+            var spec = new ProjectByIdWithAllSpec(query.ProjectId);
             var project = await repository.FirstOrDefaultAsync(spec, ct);
             if (project == null)
                 return Result<ProjectDetailDTO>.NotFound();
