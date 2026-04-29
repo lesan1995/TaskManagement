@@ -12,7 +12,7 @@ namespace TaskManagement.Core.ProjectAggregate.Handlers
         {
             logger.LogInformation($"Handling project member added event for {domainEvent.Project.Name}");
             await sendNotificationService.SendNotifications(
-                domainEvent.Project.Members.Where(x => x.IsMemberShip()).Select(x => x.UserId),
+                domainEvent.Project.Members.Where(x => x.IsMemberShip).Select(x => x.UserId),
                 NotificationContent.Create($"User {domainEvent.NewMemberId} just joined project {domainEvent.Project.Name}")
                 );
         }

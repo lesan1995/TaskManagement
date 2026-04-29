@@ -12,7 +12,7 @@ namespace TaskManagement.Core.ProjectAggregate.Handlers
         {
             logger.LogInformation($"Handling project member removed event for {domainEvent.Project.Id}");
             await sendNotificationService.SendNotifications(
-                domainEvent.Project.Members.Where(x => x.IsMemberShip()).Select(x => x.UserId),
+                domainEvent.Project.Members.Where(x => x.IsMemberShip).Select(x => x.UserId),
                 NotificationContent.Create($"User {domainEvent.UserRemovedId} just out of project {domainEvent.Project.Name}"));
         }
     }

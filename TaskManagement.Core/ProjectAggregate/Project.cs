@@ -85,6 +85,8 @@ namespace TaskManagement.Core.ProjectAggregate
             return this;
         }
 
+        public bool IsProjectManager(UserId userId) => _members.Any(x => x.UserId.Equals(userId) && x.IsManager);
+
         //-----------------Task-----------
         //----------------------------------
         private TaskItem FindTask(TaskItemId taskItemId) =>
