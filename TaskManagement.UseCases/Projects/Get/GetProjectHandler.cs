@@ -1,6 +1,4 @@
-﻿using System.Net.Mail;
-using TaskManagement.Core.ProjectAggregate.Specifications;
-using TaskManagement.Core.User;
+﻿using TaskManagement.Core.ProjectAggregate.Specifications;
 using TaskManagement.UseCases.Projects.DTO;
 
 namespace TaskManagement.UseCases.Projects.Get

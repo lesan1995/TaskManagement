@@ -7,7 +7,7 @@ namespace TaskManagement.UseCases.Projects.List
         bool IsManager,
         string? Search = null,
         ProjectStatus? Status = null,
-        string? Sort = "name",
+        string? SortBy = "name",
         bool SortDesc = false,
         bool IncludeDeleted = false
         );
