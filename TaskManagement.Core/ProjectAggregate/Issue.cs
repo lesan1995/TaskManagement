@@ -8,7 +8,7 @@ namespace TaskManagement.Core.ProjectAggregate
         public IssueContent Content { get; private set; }
         public IssueSeverity Severity { get; private set; }
         public bool IsResolved { get; private set; }
-        public IssueResolvedComment ResolvedComment { get; private set; }
+        public IssueResolvedComment? ResolvedComment { get; private set; }
         private readonly List<Attachment> _attachments = new List<Attachment>();
         public IReadOnlyCollection<Attachment> Attachments => _attachments.AsReadOnly();
         private Issue(ProjectId projectId, IssueContent content, IssueSeverity severity)
@@ -17,7 +17,6 @@ namespace TaskManagement.Core.ProjectAggregate
             Content = content;
             Severity = severity;
             IsResolved = false;
-            ResolvedComment = default!;
         }
         internal static Issue Create(ProjectId projectId, IssueContent content, IssueSeverity severity)
             => new(projectId, content, severity);
