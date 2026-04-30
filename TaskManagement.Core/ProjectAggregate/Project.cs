@@ -63,14 +63,15 @@
         //----------------------------------
         private ProjectMember FindMember(UserId userId) =>
             _members.FirstOrDefault(x => x.UserId.Equals(userId)) ?? throw new InvalidOperationException("Member does not exists");
-        public Project AddMember(UserId userId, ProjectMemberRole role)
+        public ProjectMember AddMember(UserId userId, ProjectMemberRole role)
         {
             EnsureProjectActive();
             if (_members.Any(x => x.UserId.Equals(userId)))
                 throw new InvalidOperationException("Member already exists");
-            _members.Add(ProjectMember.Create(Id, userId, role));
+            var newMember = ProjectMember.Create(Id, userId, role);
+            _members.Add(newMember);
             RegisterDomainEvents(new ProjectMemberAddedEvent(this, userId));
-            return this;
+            return newMember;
         }
         public Project RemoveMember(UserId userId)
         {

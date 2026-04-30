@@ -16,6 +16,10 @@
                 Issues: project.Issues.MapToIssueDtos()
                 );
         }
+        public static ProjectMemberDTO MapToMemberDto(this ProjectMember member, UserInfo userInfo)
+        {
+            return new ProjectMemberDTO(UserInfo: userInfo, Role: member.Role);
+        }
         public static List<ProjectMemberDTO> MapToMemberDtos(this IReadOnlyCollection<ProjectMember> members, Dictionary<UserId, UserInfo> userInfos)
         {
             return members.Select(m => new ProjectMemberDTO(
