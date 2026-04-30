@@ -1,4 +1,4 @@
-﻿namespace TaskManagement.Core.User
+﻿namespace TaskManagement.SharedKernel.User
 {
     public readonly record struct UserId
     {

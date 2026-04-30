@@ -1,6 +1,4 @@
-﻿using TaskManagement.Core.User;
-
-namespace TaskManagement.Core.ProjectAggregate.Events
+﻿namespace TaskManagement.Core.ProjectAggregate.Events
 {
     public sealed class ProjectMemberRemovedEvent(Project project, UserId userRemovedId) : DomainEventBase
     {

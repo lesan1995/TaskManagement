@@ -1,6 +1,4 @@
-﻿using TaskManagement.Core.NotificationAggregate;
-using TaskManagement.Core.User;
-using TaskManagement.SharedKernel.Results;
+﻿using TaskManagement.SharedKernel.Results;
 
 namespace TaskManagement.Core.Interfaces
 {

@@ -11,7 +11,7 @@
             if (project == null)
                 return Result<ProjectDetailDTO>.NotFound();
 
-            var memberInfos = await userService.GetUsersInfoAsync(project.Members.Select(x => x.UserId.ToString()), ct);
+            var memberInfos = await userService.GetUsersInfoAsync(project.Members.Select(x => x.UserId), ct);
 
             var projectDto = project.MapToProjectDetailDto(memberInfos);
 

@@ -1,10 +1,10 @@
-﻿namespace TaskManagement.SharedKernel
+﻿namespace TaskManagement.SharedKernel.User
 {
     public interface ICurrentUserService
     {
-        public string UserId { get; }
-        public string UserName { get; }
-        public bool IsAuthenticated { get; }
-        public bool IsManager { get; }
+        UserId UserId { get; }
+        string UserName { get; }
+        bool IsAuthenticated { get; }
+        bool IsManager { get; }
     }
 }

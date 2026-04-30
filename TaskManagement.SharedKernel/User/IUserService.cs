@@ -1,10 +1,8 @@
-﻿using TaskManagement.SharedKernel.User;
-
-namespace TaskManagement.SharedKernel
+﻿namespace TaskManagement.SharedKernel.User
 {
     public interface IUserService
     {
-        Task<Dictionary<string, UserInfo>> GetUsersInfoAsync(IEnumerable<string> userIds, CancellationToken ct);
-        Task<UserInfo> GetUserAsync(string userId, CancellationToken ct);
+        Task<Dictionary<UserId, UserInfo>> GetUsersInfoAsync(IEnumerable<UserId> userIds, CancellationToken ct);
+        Task<UserInfo> GetUserAsync(UserId userId, CancellationToken ct);
     }
 }

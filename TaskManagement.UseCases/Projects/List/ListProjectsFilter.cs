@@ -1,7 +1,7 @@
 ﻿namespace TaskManagement.UseCases.Projects.List
 {
     public record ListProjectsFilter(
-        string UserId,
+        UserId UserId,
         bool IsManager,
         string? Search = null,
         ProjectStatus? Status = null,

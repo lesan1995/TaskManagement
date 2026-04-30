@@ -1,6 +1,4 @@
-﻿using TaskManagement.Core.User;
-
-namespace TaskManagement.Core.NotificationAggregate
+﻿namespace TaskManagement.Core.NotificationAggregate
 {
     public class NotificationUser(NotificationId notificationId, UserId userId) : EntityBaseWithoutId
     {

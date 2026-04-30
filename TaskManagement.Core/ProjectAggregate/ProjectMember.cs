@@ -1,6 +1,4 @@
-﻿using TaskManagement.Core.User;
-
-namespace TaskManagement.Core.ProjectAggregate
+﻿namespace TaskManagement.Core.ProjectAggregate
 {
     public class ProjectMember : EntityBaseWithoutId
     {

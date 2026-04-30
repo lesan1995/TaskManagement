@@ -12,7 +12,7 @@
             if (project == null)
                 return Result.NotFound();
             project.Hold();
-            project.SetModified(currentUser.UserId);
+            project.SetModified(currentUser.UserId.ToString());
             return Result.Success();
         }
     }

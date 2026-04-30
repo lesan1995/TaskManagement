@@ -1,6 +1,4 @@
-﻿using TaskManagement.Core.User;
-
-namespace TaskManagement.Core.ProjectAggregate.Events
+﻿namespace TaskManagement.Core.ProjectAggregate.Events
 {
     public sealed class ProjectTaskAssignedEvent(Project project, TaskItem task, UserId assignedId) : DomainEventBase
     {

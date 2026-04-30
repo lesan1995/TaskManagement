@@ -1,7 +1,4 @@
-﻿using TaskManagement.Core.ProjectAggregate.Events;
-using TaskManagement.Core.User;
-
-namespace TaskManagement.Core.ProjectAggregate
+﻿namespace TaskManagement.Core.ProjectAggregate
 {
     public class Project : AuditableEntityBase<Project, ProjectId>, IAggregateRoot
     {

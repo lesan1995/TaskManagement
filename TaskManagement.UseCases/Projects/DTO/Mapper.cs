@@ -2,7 +2,7 @@
 {
     public static class Mapper
     {
-        public static ProjectDetailDTO MapToProjectDetailDto(this Project project, Dictionary<string, UserInfo> userInfos)
+        public static ProjectDetailDTO MapToProjectDetailDto(this Project project, Dictionary<UserId, UserInfo> userInfos)
         {
             return new ProjectDetailDTO(
                 Id: project.Id,
@@ -16,19 +16,19 @@
                 Issues: project.Issues.MapToIssueDtos()
                 );
         }
-        public static List<ProjectMemberDTO> MapToMemberDtos(this IReadOnlyCollection<ProjectMember> members, Dictionary<string, UserInfo> userInfos)
+        public static List<ProjectMemberDTO> MapToMemberDtos(this IReadOnlyCollection<ProjectMember> members, Dictionary<UserId, UserInfo> userInfos)
         {
             return members.Select(m => new ProjectMemberDTO(
-                    UserInfo: userInfos.GetValueOrDefault(m.UserId.ToString()) ?? new UserInfo { UserId = m.UserId.ToString(), UserName = "Unknown User" },
+                    UserInfo: userInfos.GetValueOrDefault(m.UserId) ?? new UserInfo { UserId = m.UserId, UserName = "Unknown User" },
                     Role: m.Role)).ToList();
         }
-        public static List<TaskItemDTO> MapToTaskItemDtos(this IReadOnlyCollection<TaskItem> tasks, Dictionary<string, UserInfo> userInfos)
+        public static List<TaskItemDTO> MapToTaskItemDtos(this IReadOnlyCollection<TaskItem> tasks, Dictionary<UserId, UserInfo> userInfos)
         {
             return tasks.Select(task => new TaskItemDTO(
                     Title: task.Title,
                     Description: task.Description,
                     IsDone: task.IsDone,
-                    Assignee: task.AssigneeId.HasValue ? userInfos.GetValueOrDefault(task.AssigneeId.Value.ToString()) : null,
+                    Assignee: task.AssigneeId.HasValue ? userInfos.GetValueOrDefault(task.AssigneeId.Value) : null,
                     OverIndex: task.OverIndex,
                     Attachments: task.Attachments.Select(attachment => attachment.FileUrl).ToList()
                     )).ToList();

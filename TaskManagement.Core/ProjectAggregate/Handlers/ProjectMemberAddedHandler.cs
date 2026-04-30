@@ -1,8 +1,4 @@
-﻿using TaskManagement.Core.Interfaces;
-using TaskManagement.Core.NotificationAggregate;
-using TaskManagement.Core.ProjectAggregate.Events;
-
-namespace TaskManagement.Core.ProjectAggregate.Handlers
+﻿namespace TaskManagement.Core.ProjectAggregate.Handlers
 {
     public class ProjectMemberAddedHandler(
         ILogger<ProjectMemberAddedHandler> logger,
