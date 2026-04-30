@@ -17,8 +17,8 @@
                 return Result<ProjectMemberDTO>.Forbidden("You do not have permission to update role of members");
 
             project.UpdateMemberRole(command.UserId, command.Role);
-
-            await repository.UpdateAsync(project);
+            project.SetModified(currentUser.UserId);
+            await repository.UpdateAsync(project, ct);
 
             return Result.Success();
         }

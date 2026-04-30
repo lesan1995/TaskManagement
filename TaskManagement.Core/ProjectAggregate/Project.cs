@@ -115,11 +115,11 @@
             UpdateProjectStatus(oldProgress);
             return newTask;
         }
-        public Project UpdateTask(TaskItemId taskItemId, TaskItemTitle title, string description)
+        public TaskItem UpdateTask(TaskItemId taskItemId, TaskItemTitle title, string description)
         {
             EnsureProjectActive();
-            FindTask(taskItemId).UpdateInfo(title, description);
-            return this;
+            var task = FindTask(taskItemId).UpdateInfo(title, description);
+            return task;
         }
         public Project ReorderTasks(List<TaskItemId> newOrders)
         {

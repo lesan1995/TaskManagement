@@ -8,11 +8,13 @@
         {
             if (!currentUser.IsManager)
                 return Result.Forbidden("Only managers can cancel project");
-            var project = await repository.GetByIdAsync(command.ProjectId, ct);
+            var spec = new ProjectByIdBasicSpec(command.ProjectId);
+            var project = await repository.FirstOrDefaultAsync(spec, ct);
             if (project == null)
                 return Result.NotFound();
             project.Cancel();
-            project.SetModified(currentUser.UserId.ToString());
+            project.SetModified(currentUser.UserId);
+            await repository.UpdateAsync(project, ct);
             return Result.Success();
         }
     }

@@ -18,7 +18,7 @@
         }
         public static ProjectMemberDTO MapToMemberDto(this ProjectMember member, UserInfo? userInfo)
         {
-            return new ProjectMemberDTO(UserInfo: userInfo ?? new UserInfo { UserId = member.UserId, UserName = "Unknown User" }, Role: member.Role);
+            return new ProjectMemberDTO(UserInfo: userInfo ?? UserInfo.Create(member.UserId), Role: member.Role);
         }
         public static List<ProjectMemberDTO> MapToMemberDtos(this IReadOnlyCollection<ProjectMember> members, Dictionary<UserId, UserInfo> userInfos)
         {
@@ -31,7 +31,7 @@
                     Description: task.Description,
                     IsDone: task.IsDone,
                     Assignee: task.AssigneeId.HasValue
-                        ? (userInfo ?? new UserInfo { UserId = task.AssigneeId.Value, UserName = "Unknown User" })
+                        ? (userInfo ?? UserInfo.Create(task.AssigneeId.Value))
                          : null,
                     OverIndex: task.OverIndex,
                     Attachments: task.Attachments.Select(attachment => attachment.FileUrl).ToList());

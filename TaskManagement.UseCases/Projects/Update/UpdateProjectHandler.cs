@@ -10,8 +10,9 @@
             if (!currentUser.IsManager)
                 return Result.Forbidden("Only managers can update project");
 
-            var project = await repository.GetByIdAsync(command.ProjectId, ct);
-            if(project == null)
+            var spec = new ProjectByIdBasicSpec(command.ProjectId);
+            var project = await repository.FirstOrDefaultAsync(spec, ct);
+            if (project == null)
                 return Result.NotFound();
 
             var hasChanges = false;
@@ -32,7 +33,7 @@
 
             if (!hasChanges) return Result.Success();
 
-            project.SetModified(currentUser.UserId.ToString());
+            project.SetModified(currentUser.UserId);
 
             await repository.UpdateAsync(project, ct);
             return Result.Success();

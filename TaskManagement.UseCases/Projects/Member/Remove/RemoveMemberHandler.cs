@@ -17,8 +17,8 @@
                 return Result<ProjectMemberDTO>.Forbidden("You do not have permission to remove members");
 
             project.RemoveMember(command.UserId);
-
-            await repository.UpdateAsync(project);
+            project.SetModified(currentUser.UserId);
+            await repository.UpdateAsync(project, ct);
 
             return Result.Success();
         }

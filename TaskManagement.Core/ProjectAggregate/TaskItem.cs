@@ -20,11 +20,12 @@
         }
         internal static TaskItem Create(ProjectId projectId, TaskItemTitle title, string description, TaskItemIndex overIndex)
             => new TaskItem(projectId, title, description, overIndex);
-        internal void UpdateInfo(TaskItemTitle title, string description)
+        internal TaskItem UpdateInfo(TaskItemTitle title, string description)
         {
-            if(Title == title && Description == description) return;
+            if(Title == title && Description == description) return this;
             Title = title;
             Description = description;
+            return this;
         }
         internal void MarkDone(bool isDone) => IsDone = isDone;
         internal void Assign(UserId userId) => AssigneeId = userId;
