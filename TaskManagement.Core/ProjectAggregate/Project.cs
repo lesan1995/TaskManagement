@@ -82,6 +82,15 @@
             RegisterDomainEvents(new ProjectMemberRemovedEvent(this, userId));
             return this;
         }
+        public ProjectMember UpdateMemberRole(UserId userId, ProjectMemberRole role)
+        {
+            EnsureProjectActive();
+            var member = FindMember(userId);
+            if (member == null)
+                throw new InvalidOperationException("Member does not exists");
+            member.UpdateRole(role);
+            return member;
+        }
 
         public bool IsProjectManager(UserId userId) => _members.Any(x => x.UserId.Equals(userId) && x.IsManager);
 

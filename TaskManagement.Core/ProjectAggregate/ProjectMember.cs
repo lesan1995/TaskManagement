@@ -15,6 +15,11 @@
         }
         
         internal static ProjectMember Create(ProjectId projectId, UserId userId, ProjectMemberRole role) => new ProjectMember(projectId, userId, role);
+        internal ProjectMember UpdateRole(ProjectMemberRole role)
+        {
+            Role = role;
+            return this;
+        }
         internal bool IsMemberShip => Role == ProjectMemberRole.Manager || Role == ProjectMemberRole.Member;
         internal bool IsManager => Role == ProjectMemberRole.Manager;
     }

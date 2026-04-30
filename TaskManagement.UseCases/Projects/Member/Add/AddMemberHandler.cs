@@ -1,4 +1,4 @@
-﻿namespace TaskManagement.UseCases.Projects.Member
+﻿namespace TaskManagement.UseCases.Projects.Member.Add
 {
     public class AddMemberHandler(
         IRepository<Project> repository,
