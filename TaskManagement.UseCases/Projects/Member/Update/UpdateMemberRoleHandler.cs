@@ -1,4 +1,4 @@
-﻿namespace TaskManagement.UseCases.Projects.Member.Remove
+﻿namespace TaskManagement.UseCases.Projects.Member.Update
 {
     public class UpdateMemberRoleHandler(
         IRepository<Project> repository,

@@ -106,13 +106,14 @@
             else Status = ProjectStatus.Completed;
             RegisterDomainEvents(new ProjectStatusUpdatedEvent(this));
         }
-        public Project AddTask(TaskItemTitle title, string description)
+        public TaskItem AddTask(TaskItemTitle title, string description)
         {
             EnsureProjectActive();
             var oldProgress = Progress;
-            _tasks.Add(TaskItem.Create(Id, title, description, TaskItemIndex.Create(_tasks.Count() + 1)));
+            var newTask = TaskItem.Create(Id, title, description, TaskItemIndex.Create(_tasks.Count() + 1));
+            _tasks.Add(newTask);
             UpdateProjectStatus(oldProgress);
-            return this;
+            return newTask;
         }
         public Project UpdateTask(TaskItemId taskItemId, TaskItemTitle title, string description)
         {
