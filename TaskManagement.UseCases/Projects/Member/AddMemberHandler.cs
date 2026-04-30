@@ -13,11 +13,12 @@
             if (project == null)
                 return Result<ProjectMemberDTO>.NotFound();
 
-            if(!currentUser.IsManager || !project.IsProjectManager(currentUser.UserId))
+            bool hasPermission = currentUser.IsManager || project.IsProjectManager(currentUser.UserId);
+            if (!hasPermission)
                 return Result<ProjectMemberDTO>.Forbidden("You do not have permission to add memmbers");
 
-            var newMember = project.AddMember(command.userId, command.role);
-            var newMemberInfo = await userService.GetUserAsync(command.userId, ct);
+            var newMember = project.AddMember(command.UserId, command.Role);
+            var newMemberInfo = await userService.GetUserAsync(command.UserId, ct);
 
             await repository.UpdateAsync(project);
 

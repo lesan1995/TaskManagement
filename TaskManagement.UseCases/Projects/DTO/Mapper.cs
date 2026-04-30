@@ -16,15 +16,13 @@
                 Issues: project.Issues.MapToIssueDtos()
                 );
         }
-        public static ProjectMemberDTO MapToMemberDto(this ProjectMember member, UserInfo userInfo)
+        public static ProjectMemberDTO MapToMemberDto(this ProjectMember member, UserInfo? userInfo)
         {
-            return new ProjectMemberDTO(UserInfo: userInfo, Role: member.Role);
+            return new ProjectMemberDTO(UserInfo: userInfo ?? new UserInfo { UserId = member.UserId, UserName = "Unknown User" }, Role: member.Role);
         }
         public static List<ProjectMemberDTO> MapToMemberDtos(this IReadOnlyCollection<ProjectMember> members, Dictionary<UserId, UserInfo> userInfos)
         {
-            return members.Select(m => new ProjectMemberDTO(
-                    UserInfo: userInfos.GetValueOrDefault(m.UserId) ?? new UserInfo { UserId = m.UserId, UserName = "Unknown User" },
-                    Role: m.Role)).ToList();
+            return members.Select(m => m.MapToMemberDto(userInfos.GetValueOrDefault(m.UserId))).ToList();
         }
         public static List<TaskItemDTO> MapToTaskItemDtos(this IReadOnlyCollection<TaskItem> tasks, Dictionary<UserId, UserInfo> userInfos)
         {
