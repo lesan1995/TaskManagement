@@ -4,7 +4,7 @@
     {
         private UserInfo(UserId userId, string userName, string? avatarUrl)
         {
-            UserId = UserId;
+            UserId = userId;
             UserName = userName;
             AvatarUrl = avatarUrl;
         }

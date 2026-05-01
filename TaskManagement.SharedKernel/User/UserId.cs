@@ -1,6 +1,4 @@
-﻿using System.Net.Mail;
-
-namespace TaskManagement.SharedKernel.User
+﻿namespace TaskManagement.SharedKernel.User
 {
     public readonly record struct UserId
     {
@@ -11,7 +9,6 @@ namespace TaskManagement.SharedKernel.User
             if (Value < 0) throw new ArgumentException("UserId must be positive.");
             return new UserId(Value);
         }
-        public static implicit operator string(UserId id) => id.ToString();
         public override string ToString() => Value.ToString();
     }
 }

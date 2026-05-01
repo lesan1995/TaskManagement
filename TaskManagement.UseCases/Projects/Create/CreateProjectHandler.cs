@@ -10,7 +10,7 @@
             if (!currentUser.IsManager)
                 return Result<ProjectId>.Forbidden("Only managers can create Projects");
             var newProject = Project.Create(command.Name, command.Description);
-            newProject.SetCreated(currentUser.UserId);
+            newProject.SetCreated(currentUser.UserId.ToString());
             var createdItem = await repository.AddAsync(newProject, ct);
             return Result<ProjectId>.Success(createdItem.Id);
         }

@@ -14,10 +14,10 @@
 
             bool hasPermission = currentUser.IsManager || project.IsProjectManager(currentUser.UserId);
             if (!hasPermission)
-                return Result<ProjectMemberDTO>.Forbidden("You do not have permission to remove members");
+                return Result.Forbidden("You do not have permission to remove members");
 
             project.RemoveMember(command.UserId);
-            project.SetModified(currentUser.UserId);
+            project.SetModified(currentUser.UserId.ToString());
             await repository.UpdateAsync(project, ct);
 
             return Result.Success();

@@ -21,7 +21,7 @@
             var assigneeInfo = task.AssigneeId.HasValue
                 ? (await userService.GetUserAsync(task.AssigneeId.Value, ct))
                 : null;
-            project.SetModified(currentUser.UserId);
+            project.SetModified(currentUser.UserId.ToString());
 
             await repository.UpdateAsync(project, ct);
 

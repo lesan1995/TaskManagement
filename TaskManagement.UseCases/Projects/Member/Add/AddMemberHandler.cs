@@ -20,7 +20,7 @@
             var newMember = project.AddMember(command.UserId, command.Role);
             var newMemberInfo = await userService.GetUserAsync(command.UserId, ct);
 
-            project.SetModified(currentUser.UserId);
+            project.SetModified(currentUser.UserId.ToString());
             await repository.UpdateAsync(project, ct);
 
             return Result<ProjectMemberDTO>.Success(newMember.MapToMemberDto(newMemberInfo));

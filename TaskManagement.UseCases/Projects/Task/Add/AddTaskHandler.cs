@@ -17,7 +17,7 @@
                 return Result<TaskItemDTO>.Forbidden("You do not have permission to add tasks");
 
             var newTask = project.AddTask(command.Title, command.Description);
-            project.SetModified(currentUser.UserId);
+            project.SetModified(currentUser.UserId.ToString());
             await repository.UpdateAsync(project, ct);
             
             return Result<TaskItemDTO>.Success(newTask.MapToTaskItemDto());

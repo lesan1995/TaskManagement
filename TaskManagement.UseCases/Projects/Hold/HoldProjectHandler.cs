@@ -13,7 +13,7 @@
             if (project == null)
                 return Result.NotFound();
             project.Hold();
-            project.SetModified(currentUser.UserId);
+            project.SetModified(currentUser.UserId.ToString());
             await repository.UpdateAsync(project, ct);
             return Result.Success();
         }
