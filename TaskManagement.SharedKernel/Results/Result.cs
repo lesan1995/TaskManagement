@@ -7,11 +7,11 @@
         public string? ErrorMessage { get; }
         public IEnumerable<ValidationError> ValidationErrors { get; } = Enumerable.Empty<ValidationError>();
 
-        protected Result(ResultStatus status, string? errorMessage = null, IEnumerable<ValidationError> validationErrors = null)
+        protected Result(ResultStatus status, string? errorMessage = null, IEnumerable<ValidationError>? validationErrors = null)
         {
             Status = status;
             ErrorMessage = errorMessage;
-            ValidationErrors = validationErrors;
+            ValidationErrors = validationErrors ?? Enumerable.Empty<ValidationError>();
         }
 
         public static Result Success() => new(ResultStatus.Ok);
@@ -28,7 +28,7 @@
     {
         public T? Value { get; set; }
 
-        protected Result(ResultStatus status, T? value = default, string? errorMessage = null, IEnumerable<ValidationError> validationErrors = null) : base(status, errorMessage, validationErrors)
+        protected Result(ResultStatus status, T? value = default, string? errorMessage = null, IEnumerable<ValidationError>? validationErrors = null) : base(status, errorMessage, validationErrors)
         {
             Value = value;
         }
