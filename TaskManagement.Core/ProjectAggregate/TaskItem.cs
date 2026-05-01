@@ -32,11 +32,11 @@
         internal void UnAssign() => AssigneeId = default!;
         internal void UpdateOverIndex(TaskItemIndex overIndex) => OverIndex = overIndex;
         internal void AddAttachment(AttachmentUrl fileUrl, UserId uploadBy) => _attachments.Add(Attachment.CreateForTask(fileUrl, uploadBy, Id));
-        internal void RemoveAttachment(AttachmentId attachmentId)
+        internal void RemoveAttachment(AttachmentUrl fileUrl)
         {
-            var attachment = _attachments.FirstOrDefault(x => x.Id == attachmentId);
+            var attachment = _attachments.FirstOrDefault(x => x.FileUrl == fileUrl);
             if (attachment == null)
-                throw new InvalidOperationException($"Attachment {attachmentId} not found in task {Id}");
+                throw new InvalidOperationException($"Attachment {fileUrl} not found in task {Id}");
             _attachments.Remove(attachment);
         }
     }

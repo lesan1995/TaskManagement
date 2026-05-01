@@ -173,19 +173,19 @@
             return this;
         }
         public IEnumerable<string> GetTaskAttachmentUrls(TaskItemId taskItemId) => FindTask(taskItemId).Attachments.Select(x => x.FileUrl.ToString());
-        public Project AddTaskAttachment(TaskItemId taskItemId, AttachmentUrl fileUrl, UserId uploadBy)
+        public TaskItem AddTaskAttachment(TaskItemId taskItemId, AttachmentUrl fileUrl, UserId uploadBy)
         {
             EnsureProjectActive();
             var task = FindTask(taskItemId);
             task.AddAttachment(fileUrl, uploadBy);
-            return this;
+            return task;
         }
-        public Project RemoveTaskAttachment(TaskItemId taskItemId, AttachmentId attachmentId)
+        public TaskItem RemoveTaskAttachment(TaskItemId taskItemId, AttachmentUrl fileUrl)
         {
             EnsureProjectActive();
             var task = FindTask(taskItemId);
-            task.RemoveAttachment(attachmentId);
-            return this;
+            task.RemoveAttachment(fileUrl);
+            return task;
         }
         //-----------------Issue-----------
         //----------------------------------
