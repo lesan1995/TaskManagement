@@ -133,24 +133,27 @@
                 FindTask(newOrders[newOverIndex]).UpdateOverIndex(TaskItemIndex.Create(newOverIndex + 1));
             return this;
         }
+        public bool IsTaskOwner(TaskItemId taskItemId, UserId userId) => FindTask(taskItemId).AssigneeId == userId;
         public Project MarkDoneTask(TaskItemId taskItemId, bool isDone)
         {
             EnsureProjectActive();
             var oldProgress = Progress;
-            FindTask(taskItemId).MarkDone(isDone);
+            var task = FindTask(taskItemId);
+            if (task.IsDone == isDone) return this;
+            task.MarkDone(isDone);
             UpdateProjectStatus(oldProgress);
             return this;
         }
-        public Project AssignTask(TaskItemId taskItemId, UserId userId)
+        public TaskItem AssignTask(TaskItemId taskItemId, UserId userId)
         {
             EnsureProjectActive();
             FindMember(userId);
             var task = FindTask(taskItemId);
             task.Assign(userId);
             RegisterDomainEvents(new ProjectTaskAssignedEvent(this, task, userId));
-            return this;
+            return task;
         }
-        public Project UnAssignTask(TaskItemId taskItemId, UserId userId)
+        public TaskItem UnAssignTask(TaskItemId taskItemId, UserId userId)
         {
             EnsureProjectActive();
             FindMember(userId);
@@ -158,7 +161,7 @@
             if (!task.AssigneeId.HasValue || task.AssigneeId != userId)
                 throw new InvalidOperationException("User does not belong to this task");
             task.UnAssign();
-            return this;
+            return task;
         }
         public Project RemoveTask(TaskItemId taskItemId)
         {
