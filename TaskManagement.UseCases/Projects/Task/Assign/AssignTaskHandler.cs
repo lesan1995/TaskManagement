@@ -15,7 +15,7 @@
 
             bool hasPermission = currentUser.IsManager || project.IsProjectManager(currentUser.UserId);
             if (!hasPermission)
-                return Result<TaskItemDTO>.Forbidden("You do not have permission to mark tasks");
+                return Result<TaskItemDTO>.Forbidden("You do not have permission to assign or unassign tasks");
 
             var assignUserInfo = await userService.GetUserAsync(command.UserId, ct);
 
