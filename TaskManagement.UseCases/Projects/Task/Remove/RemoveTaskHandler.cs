@@ -20,7 +20,7 @@ namespace TaskManagement.UseCases.Projects.Task.Remove
 
             bool hasPermission = currentUser.IsManager || project.IsProjectManager(currentUser.UserId);
             if (!hasPermission)
-                return Result<MarkTaskResultDTO>.Forbidden("You do not have permission to remove tasks");
+                return Result.Forbidden("You do not have permission to remove tasks");
 
             project.RemoveTask(command.TaskItemId);
             
@@ -37,7 +37,7 @@ namespace TaskManagement.UseCases.Projects.Task.Remove
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-                await unitOfWork.RollBackAsync(ct);
+                await unitOfWork.RollbackAsync(ct);
                 return Result.Error("Cannot remove task");
             }
             return Result.Success();
