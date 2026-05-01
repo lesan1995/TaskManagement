@@ -172,6 +172,7 @@
             _tasks.Remove(FindTask(taskItemId));
             return this;
         }
+        public IEnumerable<string> GetTaskAttachmentUrls(TaskItemId taskItemId) => FindTask(taskItemId).Attachments.Select(x => x.FileUrl.ToString());
         public Project AddTaskAttachment(TaskItemId taskItemId, AttachmentUrl fileUrl, UserId uploadBy)
         {
             EnsureProjectActive();
