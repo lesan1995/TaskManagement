@@ -12,7 +12,7 @@
             if (project == null)
                 return Result<IssueDTO>.NotFound();
 
-            bool hasPermission = currentUser.IsManager || project.IsProjectManager(currentUser.UserId);
+            bool hasPermission = project.IsProjectManager(currentUser.UserId);
             if (!hasPermission)
                 return Result<IssueDTO>.Forbidden("You do not have permission to resolve issues");
 

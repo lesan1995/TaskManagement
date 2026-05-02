@@ -18,7 +18,7 @@ namespace TaskManagement.UseCases.Projects.Issuee.Remove
             if (project == null)
                 return Result.NotFound();
 
-            bool hasPermission = currentUser.IsManager || project.IsProjectManager(currentUser.UserId);
+            bool hasPermission = project.IsProjectManager(currentUser.UserId);
             if (!hasPermission)
                 return Result.Forbidden("You do not have permission to remove issues");
 

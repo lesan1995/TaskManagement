@@ -12,7 +12,7 @@
             if (project == null)
                 return Result<IssueDTO>.NotFound();
 
-            bool hasPermission = project.IsMembership(currentUser.UserId);
+            bool hasPermission = project.IsProjectManager(currentUser.UserId);
             if (!hasPermission)
                 return Result<IssueDTO>.Forbidden("You do not have permission to add issues");
 
