@@ -222,12 +222,12 @@
             _issues.Remove(FindIssue(issueId));
             return this;
         }
-        public Project AddIssueAttachment(IssueId issueId, AttachmentUrl fileUrl, UserId uploadBy)
+        public Issue AddIssueAttachment(IssueId issueId, AttachmentUrl fileUrl, UserId uploadBy)
         {
             EnsureProjectActive();
             var issue = FindIssue(issueId);
             issue.AddAttachment(fileUrl, uploadBy);
-            return this;
+            return issue;
         }
         public Project RemoveIssueAttachment(IssueId issueId, AttachmentId attachmentId)
         {
