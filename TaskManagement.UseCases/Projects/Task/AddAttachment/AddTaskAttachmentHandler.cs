@@ -21,7 +21,7 @@ namespace TaskManagement.UseCases.Projects.Task.AddAttachment
             if (!hasPermission)
                 return Result<TaskItemDTO>.Forbidden("You do not have permission to upload attachment on this task");
 
-            var fileUrl = await fileStorage.UploadAsync(command.FileStream, command.FileName, command.ContentType, ct);
+            var fileUrl = await fileStorage.UploadAsync(command.Attachment.FileStream, command.Attachment.FileName, command.Attachment.ContentType, ct);
 
             var task = project.AddTaskAttachment(command.TaskItemId, AttachmentUrl.Create(fileUrl), currentUser.UserId);
             

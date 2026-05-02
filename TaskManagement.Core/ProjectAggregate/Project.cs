@@ -93,6 +93,7 @@
         }
 
         public bool IsProjectManager(UserId userId) => _members.Any(x => x.UserId.Equals(userId) && x.IsManager);
+        public bool IsMembership(UserId userId) => _members.Any(x => x.UserId.Equals(userId) && x.IsMemberShip);
 
         //-----------------Task-----------
         //----------------------------------
@@ -191,25 +192,28 @@
         //----------------------------------
         private Issue FindIssue(IssueId issueId) =>
             _issues.FirstOrDefault(x => x.Id.Equals(issueId)) ?? throw new InvalidOperationException("Issue does not exists");
-        public Project AddIssue(IssueContent content, IssueSeverity severity)
+        public Issue AddIssue(IssueContent content, IssueSeverity severity)
         {
             EnsureProjectActive();
-            _issues.Add(Issue.Create(Id, content, severity));
+            var issue = Issue.Create(Id, content, severity);
+            _issues.Add(issue);
             RegisterDomainEvents(new ProjectIssueAddedEvent(this));
-            return this;
+            return issue;
         }
+        public IEnumerable<string> GetIssueAttachmentUrls(IssueId issueId) => FindIssue(issueId).Attachments.Select(x => x.FileUrl.ToString());
         public Project UpdateIssue(IssueId issueId, IssueContent content, IssueSeverity severity)
         {
             EnsureProjectActive();
             FindIssue(issueId).UpdateInfo(content, severity);
             return this;
         }
-        public Project ResolveIssue(IssueId issueId, IssueResolvedComment comment)
+        public Issue ResolveIssue(IssueId issueId, IssueResolvedComment comment)
         {
             EnsureProjectActive();
-            FindIssue(issueId).Resolve(comment);
+            var issue = FindIssue(issueId);
+            issue.Resolve(comment);
             RegisterDomainEvents(new ProjectIssueResolvedEvent(this, issueId));
-            return this;
+            return issue;
         }
         public Project RemoveIssue(IssueId issueId)
         {
