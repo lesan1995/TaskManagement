@@ -30,11 +30,11 @@
             ResolvedComment = comment;
         }
         internal void AddAttachment(AttachmentUrl fileUrl, UserId uploadBy) => _attachments.Add(Attachment.CreateForIssue(fileUrl, uploadBy, Id));
-        internal void RemoveAttachment(AttachmentId attachmentId)
+        internal void RemoveAttachment(AttachmentUrl fileUrl)
         {
-            var attachment = _attachments.FirstOrDefault(x => x.Id == attachmentId);
+            var attachment = _attachments.FirstOrDefault(x => x.FileUrl == fileUrl);
             if (attachment == null)
-                throw new InvalidOperationException($"Attachment {attachmentId} not found in issue {Id}");
+                throw new InvalidOperationException($"Attachment {fileUrl} not found in issue {Id}");
             _attachments.Remove(attachment);
         }
     }

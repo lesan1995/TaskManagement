@@ -229,12 +229,12 @@
             issue.AddAttachment(fileUrl, uploadBy);
             return issue;
         }
-        public Project RemoveIssueAttachment(IssueId issueId, AttachmentId attachmentId)
+        public Issue RemoveIssueAttachment(IssueId issueId, AttachmentUrl fileUrl)
         {
             EnsureProjectActive();
             var issue = FindIssue(issueId);
-            issue.RemoveAttachment(attachmentId);
-            return this;
+            issue.RemoveAttachment(fileUrl);
+            return issue;
         }
     }
 }
