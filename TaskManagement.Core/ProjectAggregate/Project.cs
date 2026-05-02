@@ -201,11 +201,12 @@
             return issue;
         }
         public IEnumerable<string> GetIssueAttachmentUrls(IssueId issueId) => FindIssue(issueId).Attachments.Select(x => x.FileUrl.ToString());
-        public Project UpdateIssue(IssueId issueId, IssueContent content, IssueSeverity severity)
+        public Issue UpdateIssue(IssueId issueId, IssueContent content, IssueSeverity severity)
         {
             EnsureProjectActive();
-            FindIssue(issueId).UpdateInfo(content, severity);
-            return this;
+            var issue = FindIssue(issueId);
+            issue.UpdateInfo(content, severity);
+            return issue;
         }
         public Issue ResolveIssue(IssueId issueId, IssueResolvedComment comment)
         {
