@@ -3,13 +3,13 @@
     public class Notification : EntityBase<Notification, NotificationId>, IAggregateRoot
     {
         public NotificationContent Content { get; private set; }
-        public NotificationTime CreatedAt { get; private set; }
+        public DateTime CreatedAt { get; private set; }
         private readonly List<NotificationUser> _users = new();
         public IReadOnlyCollection<NotificationUser> Users => _users.AsReadOnly();
         private Notification(NotificationContent content)
         {
             Content = content;
-            CreatedAt = NotificationTime.Create();
+            CreatedAt = DateTime.UtcNow;
         }
         public static Notification Create(NotificationContent content) => new(content);
         public Notification Send(IEnumerable<UserId> userIds)
