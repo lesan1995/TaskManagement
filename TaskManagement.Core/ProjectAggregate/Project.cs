@@ -41,6 +41,8 @@
         public Project SetDeadline(ProjectDeadline deadline)
         {
             EnsureProjectActive();
+            if (deadline.IsExpired())
+                throw new InvalidOperationException("Project deadline cannot be in the past.");
             Deadline = deadline;
             return this;
         }

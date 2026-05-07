@@ -7,8 +7,8 @@
         public static ProjectDeadline Create(DateTime value)
         {
             var dateOnly = value.Date;
-            if (dateOnly < DateTime.UtcNow.Date)
-                throw new ArgumentException("Project Deadline cannot be in the past.");
+            if (dateOnly < DateTime.MinValue.Date || dateOnly > DateTime.MaxValue.Date)
+                throw new ArgumentException("Project Deadline is out of valid range.");
             return new ProjectDeadline(dateOnly);
         }
         public static ProjectDeadline Default() => Create(DateTime.UtcNow.AddDays(1));
