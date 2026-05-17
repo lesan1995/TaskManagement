@@ -27,6 +27,8 @@
                 throw new InvalidOperationException("Project has been soft deleted");
             if (Status == ProjectStatus.Cancelled)
                 throw new InvalidOperationException("Project has been cancelled");
+            if (Status == ProjectStatus.Completed)
+                throw new InvalidOperationException("Project has been completed");
         }
         public Project UpdateInfo(ProjectName name, string description)
         {
