@@ -22,6 +22,7 @@ namespace TaskManagement.UseCases.Projects.Task.Remove
             if (!hasPermission)
                 return Result.Forbidden("You do not have permission to remove tasks");
 
+            var taskAttachmentUrls = project.GetTaskAttachmentUrls(command.TaskItemId);
             project.RemoveTask(command.TaskItemId);
             
             project.SetModified(currentUser.UserId.ToString());
@@ -31,7 +32,7 @@ namespace TaskManagement.UseCases.Projects.Task.Remove
             try
             {
                 await repository.UpdateAsync(project, ct);
-                await fileService.DeletesAsync(project.GetTaskAttachmentUrls(command.TaskItemId), ct);
+                await fileService.DeletesAsync(taskAttachmentUrls, ct);
                 await unitOfWork.CommitAsync(ct);
             }
             catch (Exception ex)
