@@ -2,3 +2,4 @@
 global using System.Reflection;
 global using Ardalis.Specification.EntityFrameworkCore;
 global using TaskManagement.SharedKernel;
+global using Microsoft.Extensions.Configuration;
