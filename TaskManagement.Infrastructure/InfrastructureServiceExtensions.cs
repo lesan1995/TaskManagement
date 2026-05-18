@@ -31,7 +31,8 @@ namespace TaskManagement.Infrastructure
                 var eventDispathInterceptor = provider.GetRequiredService<EventDispatcherInterceptor>();
 
                 if(config.GetConnectionString("taskmanagement") != null ||
-                    ((isWindows || forceSqlServer) && config.GetConnectionString("DefaultConnection") != null){
+                    ((isWindows || forceSqlServer) && config.GetConnectionString("DefaultConnection") != null))
+                {
                     options.UseSqlServer(connectionString);
                 }
                 else
