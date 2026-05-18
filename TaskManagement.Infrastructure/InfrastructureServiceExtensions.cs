@@ -3,7 +3,9 @@ using Microsoft.Extensions.Logging;
 using TaskManagement.Core.Interfaces;
 using TaskManagement.Core.Services;
 using TaskManagement.Infrastructure.Data;
+using TaskManagement.Infrastructure.Data.Queries;
 using TaskManagement.SharedKernel.File;
+using TaskManagement.UseCases.Projects.List;
 
 namespace TaskManagement.Infrastructure
 {
@@ -47,7 +49,8 @@ namespace TaskManagement.Infrastructure
                     .AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>))
                     .AddScoped<IFileStorageService, LocalFileStorageService>()
                     .AddScoped<IUnitOfWork, UnitOfWork>()
-                    .AddScoped<ISendNotificationService, SendNotificationService>();
+                    .AddScoped<ISendNotificationService, SendNotificationService>()
+                    .AddScoped<IListProjectsQueryService, ListProjectsQueryService>();
 
             logger.LogInformation("Infrastruture Service registered");
 

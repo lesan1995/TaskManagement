@@ -16,7 +16,7 @@
                 IncludeDeleted: false
             );
 
-            var result = await query.ListAsync(filter, ct);
+            var result = await query.ListAsync(filter, request.Page ?? 1, request.PerPage ?? Constants.DEFAULT_PAGE_SIZE, ct);
 
             return Result<PagedResult<ProjectItemDTO>>.Success(result);
         }

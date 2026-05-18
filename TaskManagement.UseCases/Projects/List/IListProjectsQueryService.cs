@@ -2,6 +2,6 @@
 {
     public interface IListProjectsQueryService
     {
-        Task<PagedResult<ProjectItemDTO>> ListAsync(ListProjectsFilter filter, CancellationToken ct);
+        Task<PagedResult<ProjectItemDTO>> ListAsync(ListProjectsFilter filter, int page, int perPage, CancellationToken ct);
     }
 }
