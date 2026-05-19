@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using TaskManagement.Core.ProjectAggregate;
-using TaskManagement.SharedKernel.User;
 
 namespace TaskManagement.Infrastructure.Data.Config
 {
