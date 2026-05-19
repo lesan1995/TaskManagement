@@ -1,9 +1,15 @@
 <Solution>
-  <Project Path="TaskManagement.API/TaskManagement.API.csproj" />
-  <Project Path="TaskManagement.Core/TaskManagement.Core.csproj" />
-  <Project Path="TaskManagement.Identity.Core/TaskManagement.Identity.Core.csproj" Id="302f9fc7-3280-4a0d-b4bf-6952b23c078b" />
-  <Project Path="TaskManagement.Identity.Infrastructure/TaskManagement.Identity.Infrastructure.csproj" Id="f560e791-36ee-4b27-ae0f-f7b18781f612" />
-  <Project Path="TaskManagement.Infrastructure/TaskManagement.Infrastructure.csproj" />
-  <Project Path="TaskManagement.SharedKernel/TaskManagement.SharedKernel.csproj" />
-  <Project Path="TaskManagement.UseCases/TaskManagement.UseCases.csproj" />
+  <Folder Name="/Core/">
+    <Project Path="TaskManagement.API/TaskManagement.API.csproj" />
+    <Project Path="TaskManagement.Core/TaskManagement.Core.csproj" />
+    <Project Path="TaskManagement.Infrastructure/TaskManagement.Infrastructure.csproj" />
+    <Project Path="TaskManagement.UseCases/TaskManagement.UseCases.csproj" />
+  </Folder>
+  <Folder Name="/Identity/">
+    <Project Path="TaskManagement.Identity.Core/TaskManagement.Identity.Core.csproj" Id="302f9fc7-3280-4a0d-b4bf-6952b23c078b" />
+    <Project Path="TaskManagement.Identity.Infrastructure/TaskManagement.Identity.Infrastructure.csproj" Id="f560e791-36ee-4b27-ae0f-f7b18781f612" />
+  </Folder>
+  <Folder Name="/Share/">
+    <Project Path="TaskManagement.SharedKernel/TaskManagement.SharedKernel.csproj" />
+  </Folder>
 </Solution>
