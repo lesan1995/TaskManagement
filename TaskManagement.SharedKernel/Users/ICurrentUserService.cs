@@ -1,4 +1,4 @@
-﻿namespace TaskManagement.Core.Interfaces
+﻿namespace TaskManagement.SharedKernel.Users
 {
     public interface ICurrentUserService
     {

@@ -1,4 +1,4 @@
-﻿namespace TaskManagement.Core.UserAggregate
+﻿namespace TaskManagement.SharedKernel.Users
 {
     public record UserInfo
     {

@@ -4,5 +4,4 @@ global using TaskManagement.SharedKernel;
 global using TaskManagement.SharedKernel.Results;
 global using TaskManagement.Core.ProjectAggregate.Specifications;
 global using TaskManagement.UseCases.Projects.DTO;
-global using TaskManagement.Core.UserAggregate;
-global using TaskManagement.Core.Interfaces;
+global using TaskManagement.SharedKernel.Users;

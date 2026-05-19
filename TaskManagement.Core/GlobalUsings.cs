@@ -1,5 +1,5 @@
 ﻿global using TaskManagement.SharedKernel;
-global using TaskManagement.Core.UserAggregate;
+global using TaskManagement.SharedKernel.Users;
 global using Microsoft.Extensions.Logging;
 global using Mediator;
 global using Ardalis.Specification;
