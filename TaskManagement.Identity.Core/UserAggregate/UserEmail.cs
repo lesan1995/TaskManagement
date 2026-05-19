@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace TaskManagement.Core.UserAggregate
+namespace TaskManagement.Identity.Core.UserAggregate
 {
     public readonly record struct UserEmail
     {

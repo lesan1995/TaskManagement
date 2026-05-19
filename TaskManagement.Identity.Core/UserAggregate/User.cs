@@ -1,4 +1,7 @@
-﻿namespace TaskManagement.Core.UserAggregate
+﻿using TaskManagement.SharedKernel;
+using TaskManagement.SharedKernel.Users;
+
+namespace TaskManagement.Identity.Core.UserAggregate
 {
     public class User : AuditableEntityBase<User, UserId>
     {
